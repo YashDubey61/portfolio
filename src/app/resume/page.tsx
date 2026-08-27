@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Download, ExternalLink, FileText } from "lucide-react";
+import { ArrowLeft, Download, ExternalLink, FileText, Mail, Phone, MapPin, Award, GraduationCap, Code2, Briefcase } from "lucide-react";
 import { CommandMenu } from "@/components/command-menu";
 import { CurrentTime } from "@/components/CurrentTime";
 import { FooterBackground } from "@/components/FooterBackground";
 import SoftPillButton from "@/components/pixel-perfect/soft-pill-button";
 import { ThemeToggle } from "@/components/theme-toggle";
 
-const resumePath = "/Ashutosh-Singh-Resume.pdf";
+const resumePath = "/Yash-Dubey-Resume.pdf";
 
 export const metadata: Metadata = {
-  title: "Resume | Ashutoshx7",
-  description: "Resume of Ashutosh Singh, full-stack developer and open-source contributor.",
+  title: "Resume | Yash Dubey",
+  description: "Resume of Yash Dubey, B.Tech CSE (AI/ML) and Full-Stack Developer.",
 };
 
 export default function ResumePage() {
@@ -96,7 +95,7 @@ export default function ResumePage() {
                 Resume
               </h1>
               <p className="mt-1 truncate text-[12px] text-zinc-500 dark:text-zinc-400">
-                Ashutosh Singh
+                Yash Dubey
               </p>
             </div>
           </div>
@@ -116,10 +115,10 @@ export default function ResumePage() {
             </span>
             <div className="min-w-0">
               <p className="truncate text-[13px] font-semibold text-zinc-800 dark:text-zinc-200">
-                Ashutosh Singh Resume
+                Yash Dubey Resume
               </p>
               <p className="text-[11px] text-zinc-400 dark:text-zinc-600">
-                PDF document
+                B.Tech CSE (AI/ML) • Professional Resume
               </p>
             </div>
           </div>
@@ -137,7 +136,7 @@ export default function ResumePage() {
             </a>
             <a
               href={resumePath}
-              download="Ashutosh-Singh-Resume.pdf"
+              download="Yash-Dubey-Resume.pdf"
               aria-label="Download resume"
               title="Download resume"
             >
@@ -155,16 +154,123 @@ export default function ResumePage() {
           </div>
         </div>
 
-        <div className="relative aspect-[8.5/11] w-full overflow-hidden rounded-[6px] border border-black/10 bg-white shadow-sm dark:border-white/10">
-          <Image
-            src="/Ashutosh-Singh-Resume.png"
-            alt="Ashutosh Singh resume"
-            fill
-            preload
-            sizes="(min-width: 768px) 40vw, 100vw"
-            quality={75}
-            className="object-contain"
-          />
+        {/* Structured Resume Document View */}
+        <div className="w-full rounded-[8px] border border-black/10 bg-white p-6 sm:p-8 shadow-sm dark:border-white/10 dark:bg-[#09090b] space-y-6">
+          {/* Header */}
+          <div className="border-b border-black/10 pb-5 dark:border-white/10">
+            <h2 className="text-[22px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">YASH DUBEY</h2>
+            <p className="text-[13px] font-medium text-zinc-600 dark:text-zinc-400 mt-0.5">
+              B.Tech CSE (AI/ML) | Aspiring Developer | AI Enthusiast
+            </p>
+            <p className="text-[12px] text-zinc-500 dark:text-zinc-400 mt-2 italic">
+              Building impactful tech solutions at the intersection of AI, Full Stack Development, and Product Innovation.
+            </p>
+            
+            <div className="flex flex-wrap gap-4 text-[12px] text-zinc-500 dark:text-zinc-400 mt-3">
+              <span className="flex items-center gap-1.5"><Mail className="w-3.5 h-3.5 text-zinc-400" /> dubeyy426@gmail.com</span>
+              <span className="flex items-center gap-1.5"><Phone className="w-3.5 h-3.5 text-zinc-400" /> +91 9987642612</span>
+              <span className="flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5 text-zinc-400" /> Kanpur, Uttar Pradesh, India</span>
+            </div>
+          </div>
+
+          {/* Education */}
+          <div>
+            <div className="flex items-center gap-2 text-[14px] font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider mb-2">
+              <GraduationCap className="w-4 h-4" /> Education
+            </div>
+            <div className="space-y-2 text-[13px]">
+              <div className="flex justify-between items-start">
+                <div>
+                  <h4 className="font-semibold text-zinc-800 dark:text-zinc-200">Dr. A.P.J. Abdul Kalam Technical University (AKTU), Lucknow</h4>
+                  <p className="text-zinc-600 dark:text-zinc-400">Bachelor of Technology (B.Tech) - Computer Science Engineering (AI/ML Specialization)</p>
+                </div>
+                <span className="text-zinc-500 font-mono text-[12px] shrink-0">Sep 2024 – Jul 2028</span>
+              </div>
+              <p className="text-[12px] text-zinc-500 dark:text-zinc-400">
+                <strong className="text-zinc-700 dark:text-zinc-300">Relevant Coursework:</strong> Data Structures & Algorithms, Operating Systems, Theory of Automata, OOP with Java, Python Programming, Computer Networks, Machine Learning.
+              </p>
+            </div>
+          </div>
+
+          {/* Technical Skills */}
+          <div>
+            <div className="flex items-center gap-2 text-[14px] font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider mb-2">
+              <Code2 className="w-4 h-4" /> Technical Skills
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[12.5px] text-zinc-600 dark:text-zinc-400">
+              <div><strong className="text-zinc-800 dark:text-zinc-200">Languages:</strong> Python, C++, C, Java, JavaScript, Dart</div>
+              <div><strong className="text-zinc-800 dark:text-zinc-200">Frameworks:</strong> FastAPI, Flutter, Node.js, Express.js, React.js</div>
+              <div><strong className="text-zinc-800 dark:text-zinc-200">Databases:</strong> MongoDB, MySQL, Supabase</div>
+              <div><strong className="text-zinc-800 dark:text-zinc-200">AI / ML:</strong> NumPy, Pandas, Scikit-learn, RDKit, InsightFace, RAG</div>
+              <div><strong className="text-zinc-800 dark:text-zinc-200">Tools:</strong> Git, GitHub, VS Code, Postman, Xcode, Docker</div>
+              <div><strong className="text-zinc-800 dark:text-zinc-200">Core:</strong> DSA, OOP, Machine Learning, REST APIs, System Design</div>
+            </div>
+          </div>
+
+          {/* Key Projects */}
+          <div>
+            <div className="flex items-center gap-2 text-[14px] font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider mb-2">
+              <Briefcase className="w-4 h-4" /> Key Projects
+            </div>
+            <div className="space-y-3 text-[13px]">
+              <div>
+                <div className="flex justify-between items-start">
+                  <h4 className="font-semibold text-zinc-800 dark:text-zinc-200">Pindora Shield - AI Drug Safety & Discovery Assistant</h4>
+                  <span className="text-zinc-500 font-mono text-[12px]">Feb 2025 – Apr 2025</span>
+                </div>
+                <p className="text-[12px] text-zinc-500 font-mono">Python, FastAPI, RDKit, NumPy, ChEMBL, Open Targets</p>
+                <p className="text-zinc-600 dark:text-zinc-400 mt-1 text-[12.5px]">
+                  Developed an AI platform analyzing molecular structures (SMILES), calculating IC50 properties, and predicting toxicity risks. Integrated scientific data pipelines and presented at Hackoverflow 4.0.
+                </p>
+              </div>
+
+              <div>
+                <div className="flex justify-between items-start">
+                  <h4 className="font-semibold text-zinc-800 dark:text-zinc-200">VisionVerify - Facial Recognition Attendance System</h4>
+                  <span className="text-zinc-500 font-mono text-[12px]">2025</span>
+                </div>
+                <p className="text-[12px] text-zinc-500 font-mono">Python, FastAPI, InsightFace / ArcFace, Flutter, Docker</p>
+                <p className="text-zinc-600 dark:text-zinc-400 mt-1 text-[12.5px]">
+                  Built a multiface recognition attendance system capable of identifying multiple students from single classroom photographs with high-throughput embedding search and Flutter UI.
+                </p>
+              </div>
+
+              <div>
+                <div className="flex justify-between items-start">
+                  <h4 className="font-semibold text-zinc-800 dark:text-zinc-200">PolicyWise AI - Insurance Policy Analysis & Claim Support</h4>
+                  <span className="text-zinc-500 font-mono text-[12px]">2025</span>
+                </div>
+                <p className="text-[12px] text-zinc-500 font-mono">Python, FastAPI, React, RAG, LangChain</p>
+                <p className="text-zinc-600 dark:text-zinc-400 mt-1 text-[12.5px]">
+                  Engineered large document ingestion and RAG QA pipeline to evaluate policy coverage and automate claim eligibility checks.
+                </p>
+              </div>
+
+              <div>
+                <div className="flex justify-between items-start">
+                  <h4 className="font-semibold text-zinc-800 dark:text-zinc-200">FinXfer - Global Cross-Border Payments Platform</h4>
+                  <span className="text-zinc-500 font-mono text-[12px]">Jan 2025 – Present</span>
+                </div>
+                <p className="text-[12px] text-zinc-500 font-mono">Flutter, Node.js, FastAPI, MongoDB</p>
+                <p className="text-zinc-600 dark:text-zinc-400 mt-1 text-[12.5px]">
+                  FinTech concept and MVP for instant cross-border payments inspired by India&apos;s UPI ecosystem with QR workflows and real-time conversion.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Certifications & Achievements */}
+          <div>
+            <div className="flex items-center gap-2 text-[14px] font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider mb-2">
+              <Award className="w-4 h-4" /> Certifications & Achievements
+            </div>
+            <ul className="list-disc pl-5 space-y-1 text-[12.5px] text-zinc-600 dark:text-zinc-400">
+              <li><strong className="text-zinc-800 dark:text-zinc-200">Oracle Certifications:</strong> Oracle Cloud Infrastructure AI Foundations, Oracle Generative AI Foundations, Oracle AI Vector Search</li>
+              <li><strong className="text-zinc-800 dark:text-zinc-200">Hackoverflow 4.0:</strong> Team Pixels member; engineered Pindora Shield AI healthcare solution</li>
+              <li><strong className="text-zinc-800 dark:text-zinc-200">IIT Madras:</strong> Selected for IIT Madras BS in Data Science & Applications</li>
+              <li><strong className="text-zinc-800 dark:text-zinc-200">Python 100 Projects Challenge:</strong> Building 100 modular projects covering automation, APIs, and mini applications</li>
+            </ul>
+          </div>
         </div>
 
         <div className="relative mt-8">

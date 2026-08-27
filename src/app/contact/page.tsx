@@ -36,7 +36,7 @@ export default function ContactPage() {
 
     try {
       const response = await fetch(
-        "https://formsubmit.co/ajax/as1142120@gmail.com",
+        "https://formsubmit.co/ajax/dubeyy426@gmail.com",
         {
           method: "POST",
           body: data,
@@ -105,33 +105,33 @@ export default function ContactPage() {
 
       {/* Cell 1: Dot Matrix Background */}
       {/* Cell 1: Banner */}
-<div className="absolute left-0 right-0 md:left-[30%] md:right-[30%] top-0 h-[22vh] -z-0 pointer-events-auto overflow-hidden bg-white dark:bg-black shadow-[0_4px_12px_rgba(2,6,23,0.04)] dark:shadow-[0_4px_12px_rgba(2,6,23,0.10)]">
-  <Image
-    src="/ChatGPT%20Image%20May%2022%2C%202026%2C%2012_40_29%20AM.jpg"
-    alt=""
-    fill
-    fetchPriority="high"
-    sizes="(min-width: 768px) 40vw, 100vw"
-    quality={100}
-    className="object-cover object-center dark:hidden"
-  />
-  <Image
-    src="/ChatGPT%20Image%20May%2022%2C%202026%2C%2012_49_39%20AM.jpg"
-    alt=""
-    fill
-    fetchPriority="high"
-    sizes="(min-width: 768px) 40vw, 100vw"
-    quality={100}
-    className="hidden object-cover object-center dark:block"
-  />
-  <BannerParticles />
-  <div className="absolute inset-x-0 bottom-0 h-10 pointer-events-none z-[5] bg-gradient-to-t from-white/90 to-transparent dark:from-black/50 dark:to-transparent" />
-  <div className="absolute left-0 top-0 bottom-0 w-8 pointer-events-none z-20 bg-gradient-to-r from-white/90 to-transparent dark:from-black/40 dark:to-transparent" />
-  <div className="absolute right-0 top-0 bottom-0 w-8 pointer-events-none z-20 bg-gradient-to-l from-white/90 to-transparent dark:from-black/40 dark:to-transparent" />
-  <div className="absolute bottom-3 right-2 z-10 pointer-events-auto">
-    <CurrentTime />
-  </div>
-</div>
+      <div className="absolute left-0 right-0 md:left-[30%] md:right-[30%] top-0 h-[22vh] -z-0 pointer-events-auto overflow-hidden bg-white dark:bg-black shadow-[0_4px_12px_rgba(2,6,23,0.04)] dark:shadow-[0_4px_12px_rgba(2,6,23,0.10)]">
+        <Image
+          src="/ChatGPT%20Image%20May%2022%2C%202026%2C%2012_40_29%20AM.jpg"
+          alt=""
+          fill
+          fetchPriority="high"
+          sizes="(min-width: 768px) 40vw, 100vw"
+          quality={100}
+          className="object-cover object-center dark:hidden"
+        />
+        <Image
+          src="/ChatGPT%20Image%20May%2022%2C%202026%2C%2012_49_39%20AM.jpg"
+          alt=""
+          fill
+          fetchPriority="high"
+          sizes="(min-width: 768px) 40vw, 100vw"
+          quality={100}
+          className="hidden object-cover object-center dark:block"
+        />
+        <BannerParticles />
+        <div className="absolute inset-x-0 bottom-0 h-10 pointer-events-none z-[5] bg-gradient-to-t from-white/90 to-transparent dark:from-black/50 dark:to-transparent" />
+        <div className="absolute left-0 top-0 bottom-0 w-8 pointer-events-none z-20 bg-gradient-to-r from-white/90 to-transparent dark:from-black/40 dark:to-transparent" />
+        <div className="absolute right-0 top-0 bottom-0 w-8 pointer-events-none z-20 bg-gradient-to-l from-white/90 to-transparent dark:from-black/40 dark:to-transparent" />
+        <div className="absolute bottom-3 right-2 z-10 pointer-events-auto">
+          <CurrentTime />
+        </div>
+      </div>
       {/* Cell 2: Header with Back Button + Title + Controls */}
       <div className="absolute left-0 right-0 md:left-[30%] md:right-[30%] top-[22vh] h-[112px] flex items-center px-4 z-50">
         <div className="flex w-full items-center justify-between">
@@ -248,7 +248,7 @@ export default function ContactPage() {
             <p className="text-[14px] text-zinc-500 mb-2">Find me on my <span className="font-medium text-zinc-800 dark:text-zinc-200">socials</span></p>
             <div className="flex flex-wrap gap-1.5">
               <SocialHoverCard socialName="GitHub">
-                <a href="https://github.com/Ashutoshx7?tab=overview&from=2026-05-01&to=2026-05-15" target="_blank" className="flex items-center gap-1.5 px-2.5 py-1.5 bg-zinc-100 dark:bg-zinc-800/40 hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded-md text-[12px] font-medium text-zinc-600 dark:text-zinc-300 transition-colors border border-zinc-200/50 dark:border-zinc-700/50">
+                <a href="https://github.com/YashDubey61" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 px-2.5 py-1.5 bg-zinc-100 dark:bg-zinc-800/40 hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded-md text-[12px] font-medium text-zinc-600 dark:text-zinc-300 transition-colors border border-zinc-200/50 dark:border-zinc-700/50">
                   <svg viewBox="0 0 24 24" className="w-3.5 h-3.5">
                     <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" stroke="currentColor" strokeWidth="2" fill="none" />
                   </svg>
@@ -256,7 +256,7 @@ export default function ContactPage() {
                 </a>
               </SocialHoverCard>
               <SocialHoverCard socialName="Twitter">
-                <a href="https://x.com/Ashutosh_7x7" target="_blank" className="flex items-center gap-1.5 px-2.5 py-1.5 bg-zinc-100 dark:bg-zinc-800/40 hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded-md text-[12px] font-medium text-zinc-600 dark:text-zinc-300 transition-colors border border-zinc-200/50 dark:border-zinc-700/50">
+                <a href="https://x.com/YashDubey61" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 px-2.5 py-1.5 bg-zinc-100 dark:bg-zinc-800/40 hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded-md text-[12px] font-medium text-zinc-600 dark:text-zinc-300 transition-colors border border-zinc-200/50 dark:border-zinc-700/50">
                   <svg viewBox="0 0 24 24" className="w-3.5 h-3.5">
                     <path d="M4 4l11.733 16h4.267l-11.733-16zM4 20l6.768-6.768M20 4l-6.768 6.768" stroke="currentColor" strokeWidth="2" fill="none" />
                   </svg>
@@ -264,7 +264,7 @@ export default function ContactPage() {
                 </a>
               </SocialHoverCard>
               <SocialHoverCard socialName="LinkedIn">
-                <a href="https://www.linkedin.com/in/ashutosh-singh-855177329/" target="_blank" className="flex items-center gap-1.5 px-2.5 py-1.5 bg-zinc-100 dark:bg-zinc-800/40 hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded-md text-[12px] font-medium text-zinc-600 dark:text-zinc-300 transition-colors border border-zinc-200/50 dark:border-zinc-700/50">
+                <a href="https://www.linkedin.com/in/yash-dubey61" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 px-2.5 py-1.5 bg-zinc-100 dark:bg-zinc-800/40 hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded-md text-[12px] font-medium text-zinc-600 dark:text-zinc-300 transition-colors border border-zinc-200/50 dark:border-zinc-700/50">
                   <svg viewBox="0 0 24 24" className="w-3.5 h-3.5">
                     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1-2 2 2 2 0 0 1 2-2z" stroke="currentColor" strokeWidth="2" fill="none" />
                   </svg>
@@ -276,7 +276,7 @@ export default function ContactPage() {
 
           <div className="flex-grow h-[160px] relative flex items-center justify-end -mr-56 mt-2">
             <DisplacementText
-              text="ASHUTOSH"
+              text="YASH"
               fontSize={300}
               className="h-full w-full"
               lightColor="#171717"

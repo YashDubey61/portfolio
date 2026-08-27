@@ -104,21 +104,21 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 allowFullScreen
               ></iframe>
             ) : (
-              <video 
-                src={project.video} 
-                className="w-full h-full object-cover" 
-                controls 
-                autoPlay 
-                muted 
-                loop 
-                playsInline 
+              <video
+                src={project.video}
+                className="w-full h-full object-cover"
+                controls
+                autoPlay
+                muted
+                loop
+                playsInline
               />
             )
           ) : (
-            <Image 
-              src={project.src} 
-              alt={project.imageTitle} 
-              fill 
+            <Image
+              src={project.src}
+              alt={project.imageTitle}
+              fill
               preload
               sizes="(min-width: 768px) 40vw, 100vw"
               quality={75}
@@ -141,7 +141,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               <SiGithub className="w-4 h-4" /> Github
             </a>
           ) : <div />}
-          
+
           {/* Vertical Divider 1 */}
           <div className="hidden md:block absolute left-1/3 top-0 bottom-0 w-0 border-l border-black/30 dark:border-white/[0.15] pointer-events-none" style={{ maskImage: 'repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)' }} />
 
@@ -150,12 +150,12 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               <ExternalLink className="w-4 h-4" /> Website
             </a>
           ) : <div />}
-          
+
           {/* Vertical Divider 2 */}
           <div className="hidden md:block absolute left-2/3 top-0 bottom-0 w-0 border-l border-black/30 dark:border-white/[0.15] pointer-events-none" style={{ maskImage: 'repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)' }} />
 
           <a href="#" className="hidden md:flex items-center justify-center gap-2 text-[13px] font-medium text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="9" x2="15" y1="9" y2="9"/><line x1="9" x2="15" y1="15" y2="15"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4"><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><line x1="9" x2="15" y1="9" y2="9" /><line x1="9" x2="15" y1="15" y2="15" /></svg>
             Post
           </a>
         </div>
@@ -174,10 +174,18 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           </h1>
           <div className="flex items-center gap-2">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
+                project.live ? "bg-emerald-400" : project.github ? "bg-blue-400" : "bg-amber-400"
+              }`}></span>
+              <span className={`relative inline-flex rounded-full h-2 w-2 ${
+                project.live ? "bg-emerald-500" : project.github ? "bg-blue-500" : "bg-amber-500"
+              }`}></span>
             </span>
-            <span className="text-[13px] font-medium text-emerald-600 dark:text-emerald-400">Live</span>
+            <span className={`text-[13px] font-medium ${
+              project.live ? "text-emerald-600 dark:text-emerald-400" : project.github ? "text-blue-600 dark:text-blue-400" : "text-amber-600 dark:text-amber-400"
+            }`}>
+              {project.live ? "Live" : project.github ? "Repository" : "In Development"}
+            </span>
           </div>
         </div>
 

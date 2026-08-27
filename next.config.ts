@@ -9,24 +9,23 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "static.wixstatic.com",
-        port: "",
-        pathname: "/media/**",
-        search: "",
+        hostname: "avatars.githubusercontent.com",
       },
       {
         protocol: "https",
         hostname: "github.com",
-        port: "",
-        pathname: "/ashutoshx7.png",
-        search: "",
+      },
+      {
+        protocol: "https",
+        hostname: "raw.githubusercontent.com",
       },
       {
         protocol: "https",
         hostname: "unavatar.io",
-        port: "",
-        pathname: "/twitter/**",
-        search: "",
+      },
+      {
+        protocol: "https",
+        hostname: "static.wixstatic.com",
       },
     ],
   },

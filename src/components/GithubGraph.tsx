@@ -55,7 +55,7 @@ export function GithubGraph() {
     const fetchContributions = async () => {
       const cacheKey = "github_contributions";
       const cachedData = typeof window !== "undefined" ? localStorage.getItem(cacheKey) : null;
-      
+
       if (cachedData) {
         try {
           const parsed = JSON.parse(cachedData);
@@ -100,7 +100,7 @@ export function GithubGraph() {
 
         const data = await response.json();
         const calendar = data?.data?.user?.contributionsCollection?.contributionCalendar;
-        
+
         if (calendar) {
           setWeeks(calendar.weeks);
           setMonths(calendar.months);
@@ -238,45 +238,45 @@ export function GithubGraph() {
             <div className="grid grid-cols-[repeat(53,minmax(0,1fr))] gap-x-[2px]" role="img" aria-label={graphStatus}>
               {loading && weeks.length === 0
                 ? Array.from({ length: 53 }).map((_, colIndex) => (
-                    <div key={colIndex} className="flex flex-col gap-[2px]">
-                      {Array.from({ length: 7 }).map((__, rowIndex) => (
-                        <div
-                          key={rowIndex}
-                          className="aspect-square w-full animate-pulse rounded-[2px] bg-zinc-100 dark:bg-zinc-800"
-                        />
-                      ))}
-                    </div>
-                  ))
+                  <div key={colIndex} className="flex flex-col gap-[2px]">
+                    {Array.from({ length: 7 }).map((__, rowIndex) => (
+                      <div
+                        key={rowIndex}
+                        className="aspect-square w-full animate-pulse rounded-[2px] bg-zinc-100 dark:bg-zinc-800"
+                      />
+                    ))}
+                  </div>
+                ))
                 : graphWeeks.map((week, colIndex) => (
-                    <div key={colIndex} className="flex flex-col gap-[2px]">
-                      {colIndex === 0 &&
-                        Array.from({ length: 7 - week.contributionDays.length }).map((_, i) => (
-                          <div key={`empty-top-${i}`} className="aspect-square w-full rounded-[2px] bg-transparent" />
-                        ))}
+                  <div key={colIndex} className="flex flex-col gap-[2px]">
+                    {colIndex === 0 &&
+                      Array.from({ length: 7 - week.contributionDays.length }).map((_, i) => (
+                        <div key={`empty-top-${i}`} className="aspect-square w-full rounded-[2px] bg-transparent" />
+                      ))}
 
-                      {week.contributionDays.map((day) => {
-                        const level = getLevel(day.contributionCount);
-                        const color = contributionLevels[level];
+                    {week.contributionDays.map((day) => {
+                      const level = getLevel(day.contributionCount);
+                      const color = contributionLevels[level];
 
-                        return (
-                          <div
-                            key={day.date}
-                            aria-hidden="true"
-                            aria-label={`${day.contributionCount} contributions on ${formatDate(day.date)}`}
-                            className={`aspect-square w-full rounded-[2px] opacity-80 outline-none transition-[opacity,transform] hover:scale-125 hover:opacity-100 dark:opacity-70 dark:hover:opacity-100 ${color.cell}`}
-                            onMouseEnter={(event) => showTooltip(day, event)}
-                            onMouseLeave={() => setTooltip(null)}
-                          />
-                        );
-                      })}
+                      return (
+                        <div
+                          key={day.date}
+                          aria-hidden="true"
+                          aria-label={`${day.contributionCount} contributions on ${formatDate(day.date)}`}
+                          className={`aspect-square w-full rounded-[2px] opacity-80 outline-none transition-[opacity,transform] hover:scale-125 hover:opacity-100 dark:opacity-70 dark:hover:opacity-100 ${color.cell}`}
+                          onMouseEnter={(event) => showTooltip(day, event)}
+                          onMouseLeave={() => setTooltip(null)}
+                        />
+                      );
+                    })}
 
-                      {colIndex !== 0 &&
-                        week.contributionDays.length < 7 &&
-                        Array.from({ length: 7 - week.contributionDays.length }).map((_, i) => (
-                          <div key={`empty-bottom-${i}`} className="aspect-square w-full rounded-[2px] bg-transparent" />
-                        ))}
-                    </div>
-                  ))}
+                    {colIndex !== 0 &&
+                      week.contributionDays.length < 7 &&
+                      Array.from({ length: 7 - week.contributionDays.length }).map((_, i) => (
+                        <div key={`empty-bottom-${i}`} className="aspect-square w-full rounded-[2px] bg-transparent" />
+                      ))}
+                  </div>
+                ))}
             </div>
           </div>
         </div>

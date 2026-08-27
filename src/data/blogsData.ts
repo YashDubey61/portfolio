@@ -13,37 +13,37 @@ export interface Blog {
 
 export type BlogBlock =
   | {
-      type: "heading";
-      text: string;
-    }
+    type: "heading";
+    text: string;
+  }
   | {
-      type: "paragraph";
-      text: string;
-    }
+    type: "paragraph";
+    text: string;
+  }
   | {
-      type: "quote";
-      text: string;
-    }
+    type: "quote";
+    text: string;
+  }
   | {
-      type: "image";
-      src: string;
-      alt: string;
-      caption: string;
-      width: number;
-      height: number;
-    }
+    type: "image";
+    src: string;
+    alt: string;
+    caption: string;
+    width: number;
+    height: number;
+  }
   | {
-      type: "list";
-      items: string[];
-    }
+    type: "list";
+    items: string[];
+  }
   | {
-      type: "links";
-      items: {
-        title: string;
-        href: string;
-        description: string;
-      }[];
-    };
+    type: "links";
+    items: {
+      title: string;
+      href: string;
+      description: string;
+    }[];
+  };
 
 export const blogsData: Blog[] = [
   {

@@ -108,7 +108,7 @@ export const ProjectCard = ({
             variants={{ rest: { scale: 0.5, opacity: 0 }, hover: { scale: 1, opacity: 1 } }}
             transition={{ type: "spring", stiffness: 300, damping: 20, delay: 0.05 }}
           >
-            <div 
+            <div
               className="h-10 w-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 active:scale-95 transition-transform duration-200 border border-white/50"
               onClick={(e) => {
                 e.stopPropagation();

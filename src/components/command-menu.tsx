@@ -55,6 +55,16 @@ export function CommandMenu() {
         command()
     }, [])
 
+    const navigateToSection = React.useCallback((hash: string) => {
+        if (typeof window !== "undefined") {
+            if (window.location.pathname === "/") {
+                window.location.hash = hash;
+            } else {
+                window.location.href = `/${hash}`;
+            }
+        }
+    }, []);
+
     React.useEffect(() => {
         const down = (e: KeyboardEvent) => {
             const target = e.target as HTMLElement;
@@ -76,19 +86,19 @@ export function CommandMenu() {
                 // Navigation
                 if (key === 'e') {
                     e.preventDefault()
-                    runCommand(() => window.location.hash = "#experience")
+                    runCommand(() => navigateToSection("#experience"))
                 } else if (key === 'p') {
                     e.preventDefault()
-                    runCommand(() => window.location.hash = "#projects")
+                    runCommand(() => navigateToSection("#projects"))
                 } else if (key === 'b') {
                     e.preventDefault()
-                    runCommand(() => window.location.hash = "#blogs")
+                    runCommand(() => navigateToSection("#blogs"))
                 } else if (key === 'o') {
                     e.preventDefault()
-                    runCommand(() => window.location.hash = "#opensource")
+                    runCommand(() => navigateToSection("#opensource"))
                 } else if (key === 's') {
                     e.preventDefault()
-                    runCommand(() => window.location.hash = "#skills")
+                    runCommand(() => navigateToSection("#skills"))
                 }
 
                 // General
@@ -116,7 +126,7 @@ export function CommandMenu() {
 
         document.addEventListener("keydown", down)
         return () => document.removeEventListener("keydown", down)
-    }, [open, openExternal, runCommand, setTheme])
+    }, [open, openExternal, runCommand, setTheme, navigateToSection])
 
     return (
         <>
@@ -151,27 +161,27 @@ export function CommandMenu() {
                     <CommandEmpty>No results found.</CommandEmpty>
 
                     <CommandGroup heading="Sections">
-                        <CommandItem onSelect={() => runCommand(() => window.location.hash = "#experience")} className="rounded-lg py-3 cursor-pointer">
+                        <CommandItem onSelect={() => runCommand(() => navigateToSection("#experience"))} className="rounded-lg py-3 cursor-pointer">
                             <Briefcase className="mr-2 h-4 w-4 text-zinc-500" />
                             <span>Experience</span>
                             <CommandShortcut className="font-mono text-[10px] bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 rounded border border-zinc-200 dark:border-zinc-700">shift + E</CommandShortcut>
                         </CommandItem>
-                        <CommandItem onSelect={() => runCommand(() => window.location.hash = "#projects")} className="rounded-lg py-3 cursor-pointer">
+                        <CommandItem onSelect={() => runCommand(() => navigateToSection("#projects"))} className="rounded-lg py-3 cursor-pointer">
                             <Code className="mr-2 h-4 w-4 text-zinc-500" />
                             <span>Projects</span>
                             <CommandShortcut className="font-mono text-[10px] bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 rounded border border-zinc-200 dark:border-zinc-700">shift + P</CommandShortcut>
                         </CommandItem>
-                        <CommandItem onSelect={() => runCommand(() => window.location.hash = "#blogs")} className="rounded-lg py-3 cursor-pointer">
+                        <CommandItem onSelect={() => runCommand(() => navigateToSection("#blogs"))} className="rounded-lg py-3 cursor-pointer">
                             <FileText className="mr-2 h-4 w-4 text-zinc-500" />
                             <span>Blogs</span>
                             <CommandShortcut className="font-mono text-[10px] bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 rounded border border-zinc-200 dark:border-zinc-700">shift + B</CommandShortcut>
                         </CommandItem>
-                        <CommandItem onSelect={() => runCommand(() => window.location.hash = "#opensource")} className="rounded-lg py-3 cursor-pointer">
+                        <CommandItem onSelect={() => runCommand(() => navigateToSection("#opensource"))} className="rounded-lg py-3 cursor-pointer">
                             <SiGithub className="mr-2 h-4 w-4 text-zinc-500" />
                             <span>Open Source</span>
                             <CommandShortcut className="font-mono text-[10px] bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 rounded border border-zinc-200 dark:border-zinc-700">shift + O</CommandShortcut>
                         </CommandItem>
-                        <CommandItem onSelect={() => runCommand(() => window.location.hash = "#skills")} className="rounded-lg py-3 cursor-pointer">
+                        <CommandItem onSelect={() => runCommand(() => navigateToSection("#skills"))} className="rounded-lg py-3 cursor-pointer">
                             <BookOpen className="mr-2 h-4 w-4 text-zinc-500" />
                             <span>Skills</span>
                             <CommandShortcut className="font-mono text-[10px] bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 rounded border border-zinc-200 dark:border-zinc-700">shift + S</CommandShortcut>

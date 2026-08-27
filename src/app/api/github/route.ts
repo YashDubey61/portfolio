@@ -18,6 +18,7 @@ export async function POST(request: Request) {
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`,
+        "User-Agent": "YashDubey-Portfolio",
       },
       body: JSON.stringify({ query }),
     });

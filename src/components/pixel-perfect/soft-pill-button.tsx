@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { cn } from "@/lib/utils";
+import { useClickSound } from "@/hooks/soundcn/use-click-sound";
 
 export type SoftPillVariant = "secondary" | "primary";
 
@@ -14,11 +15,23 @@ interface SoftPillButtonProps
 }
 
 const SoftPillButton = React.forwardRef<HTMLButtonElement, SoftPillButtonProps>(
-  ({ className, children, variant = "secondary", as: Comp = "button", ...props }, ref) => {
+  ({ className, children, variant = "secondary", as: Comp = "button", onClick, ...props }, ref) => {
     const isPrimary = variant === "primary";
+    const [playClick] = useClickSound();
+
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+      try {
+        playClick();
+      } catch {
+        // AudioContext fallback
+      }
+      onClick?.(e);
+    };
+
     return (
       <Comp
         ref={ref}
+        onClick={handleClick}
         className={cn(
           "group relative block rounded-[4px] text-center px-5 py-2.5 text-[13px] font-medium tracking-tight transition-[transform] duration-200 active:scale-[0.99] active:duration-[50ms]",
           "[backdrop-filter:blur(6px)]",

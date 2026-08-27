@@ -87,7 +87,7 @@ const fragmentShader = `
 `;
 
 const DisplacementText = ({
-  text = " Karn Singh",
+  text = "YASH",
   fontSize = 200,
   font = "sans-serif",
   color,
@@ -283,7 +283,7 @@ const DisplacementText = ({
   }, [text, fontSize, font, color, lightColor, darkColor]);
 
   return (
-    <div ref={containerRef} className={cn("relative h-200 w-full", className)} />
+    <div ref={containerRef} className={cn("relative h-[200px] w-full", className)} />
   );
 };
 

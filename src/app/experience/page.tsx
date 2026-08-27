@@ -5,6 +5,7 @@ import { CommandMenu } from "@/components/command-menu";
 import { CurrentTime } from "@/components/CurrentTime";
 import { RightNavbar } from "@/components/RightNavbar";
 import { FooterBackground } from "@/components/FooterBackground";
+import { ExperienceIcon } from "@/components/ExperienceIcons";
 import Link from "next/link";
 import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
@@ -15,7 +16,8 @@ type ExperienceData = {
   role: string;
   dates: string;
   location: string;
-  src: string;
+  src?: string;
+  iconKey?: string;
   type?: string;
   imageFit?: "contain" | "cover";
   imageZoom?: number;
@@ -32,9 +34,8 @@ const experiences: ExperienceData[] = [
     dates: "Feb 2025 - Apr 2025",
     location: "Hackathon",
     type: "Hackathon",
-    src: "/image copy.png",
-    imageFit: "contain",
-    imageZoom: 1,
+    iconKey: "hackoverflow",
+    src: "/hackoverflow-logo.jpg",
     description: `
       Ideation: Collaborated with a cross-functional team to ideate, design, and develop Pindora Shield, an AI-powered healthcare & drug discovery assistant within hackathon deadlines
       ML Pipeline: Implemented molecular property analysis pipelines, SMILES string parsing, and IC50 property estimation using RDKit and NumPy
@@ -63,9 +64,8 @@ const experiences: ExperienceData[] = [
     dates: "2025 - Present",
     location: "Kanpur, India",
     type: "Initiative",
-    src: "/project-image/image copy.png",
-    imageFit: "contain",
-    imageZoom: 1,
+    iconKey: "odysis",
+    src: "/odysis-logo.png",
     description: `
       Product Studio: Independent technology initiative creating AI products, full-stack applications, and workflow automations
       Key Projects: Developing experimental tools including Odysis Studio (AI video editor) and FinXfer cross-border payment platform
@@ -92,9 +92,7 @@ const experiences: ExperienceData[] = [
     dates: "Sep 2024 - Jul 2028",
     location: "Lucknow / Kanpur, India",
     type: "Education",
-    src: "/image copy 3.png",
-    imageFit: "contain",
-    imageZoom: 1,
+    iconKey: "aktu",
     description: `
       Undergraduate Program: Pursuing 4-year B.Tech in Computer Science Engineering with specialization in Artificial Intelligence and Machine Learning
       Coursework: Data Structures & Algorithms, Operating Systems, Theory of Automata, OOP with Java, Python Programming, Computer Networks, and Machine Learning
@@ -226,55 +224,26 @@ export default function AllExperiencePage() {
                     <div className="flex min-w-0 flex-1 items-start gap-3 sm:gap-4">
                       <div className="size-10 shrink-0 rounded-[10px] border border-black/10 bg-zinc-50 p-[2px] shadow-sm shadow-black/15 dark:border-zinc-800 dark:bg-[#111111] dark:shadow-md dark:shadow-black/50">
                         <div className="w-full h-full rounded-[7px] border border-black/5 dark:border-black/20 bg-white flex items-center justify-center overflow-hidden relative">
-                          <Image
-                            src={item.src}
-                            alt={item.title}
-                            width={40}
-                            height={40}
-                            sizes="40px"
-                            quality={60}
-                            style={item.imageZoom ? { transform: `scale(${item.imageZoom})` } : undefined}
-                            className={`${item.imageFit === "contain" ? "object-contain" : "object-cover"} w-full h-full p-0.5`}
-                          />
+                          {item.iconKey ? (
+                            <ExperienceIcon name={item.iconKey} className="w-full h-full" />
+                          ) : item.src ? (
+                            <Image
+                              src={item.src}
+                              alt={item.title}
+                              width={40}
+                              height={40}
+                              sizes="40px"
+                              quality={60}
+                              style={item.imageZoom ? { transform: `scale(${item.imageZoom})` } : undefined}
+                              className={`${item.imageFit === "contain" ? "object-contain" : "object-cover"} w-full h-full p-0.5`}
+                            />
+                          ) : null}
                         </div>
                       </div>
                       <div className="flex min-w-0 flex-col gap-0.5 pr-2 sm:pr-4">
                         <div className="flex flex-wrap items-center gap-2">
                           <span className="text-[14px] font-bold leading-tight text-zinc-900 dark:text-zinc-100 sm:text-[17px]">
-                            {item.title === "Vercel OSS Program x VengenceUI" ? (
-                              <>
-                                <span className="sm:hidden">Vercel OSS Program x VengenceUI</span>
-                                <span className="hidden flex-wrap items-center gap-x-2 gap-y-1 align-middle sm:inline-flex">
-                                  <span className="inline-flex h-10 items-center">
-                                    Vercel OSS Program
-                                  </span>
-                                  <span className="inline-flex h-10 items-center text-[13px] font-semibold leading-none text-zinc-500 dark:text-zinc-500">
-                                    x
-                                  </span>
-                                  <span className="inline-flex h-10 items-center gap-2 leading-none">
-                                    <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-[10px] border border-black/10 bg-zinc-50 p-[2px] shadow-sm shadow-black/15 dark:border-zinc-800 dark:bg-[#111111] dark:shadow-md dark:shadow-black/50">
-                                      <span className="inline-flex size-full items-center justify-center overflow-hidden rounded-[7px] border border-black/5 bg-white dark:border-black/20">
-                                        <Image
-                                          src="/Experience-image/vengenceui-title-bg-less.png"
-                                          alt=""
-                                          width={113}
-                                          height={96}
-                                          sizes="40px"
-                                          quality={60}
-                                          aria-hidden="true"
-                                          className="h-[18px] w-auto -translate-x-px translate-y-px rotate-180 object-contain"
-                                        />
-                                      </span>
-                                    </span>
-                                    <span className="inline-flex h-10 items-center">
-                                      VengenceUI
-                                    </span>
-                                  </span>
-                                </span>
-                              </>
-                            ) : (
-                              item.title
-                            )}
+                            {item.title}
                           </span>
                           {item.type && (
                             <span className="self-center whitespace-nowrap px-1.5 py-[1px] rounded-[4px] text-[11px] font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-200/50 dark:bg-zinc-800/50 border border-zinc-300/50 dark:border-zinc-700/50">
@@ -283,7 +252,7 @@ export default function AllExperiencePage() {
                           )}
                         </div>
                         <span
-                          className={`${item.title === "Vercel OSS Program x VengenceUI" ? "sm:-mt-2" : ""} truncate text-[14px] text-zinc-600 dark:text-zinc-400 sm:text-[15px]`}
+                          className="truncate text-[14px] text-zinc-600 dark:text-zinc-400 sm:text-[15px]"
                         >
                           {item.role}
                         </span>
@@ -402,25 +371,7 @@ export default function AllExperiencePage() {
                                         <strong className="font-semibold text-zinc-800 dark:text-zinc-200">
                                           {label}:
                                         </strong>
-                                        {detail
-                                          .join(":")
-                                          .split(
-                                            /(kgateway|FOSSology|FOSSASIA Eventyay|Extralit|React JSON Schema Form)/,
-                                          )
-                                          .map((part, partIndex) =>
-                                            /^(kgateway|FOSSology|FOSSASIA Eventyay|Extralit|React JSON Schema Form)$/.test(
-                                              part,
-                                            ) ? (
-                                              <strong
-                                                key={partIndex}
-                                                className="font-semibold text-zinc-800 dark:text-zinc-200"
-                                              >
-                                                {part}
-                                              </strong>
-                                            ) : (
-                                              part
-                                            ),
-                                          )}
+                                        {detail.join(":")}
                                       </>
                                     ) : (
                                       point.trim()

@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef, useCallback } from "react";
 import Link from "next/link";
+import { useClickSound } from "@/hooks/soundcn/use-click-sound";
 
 interface PR {
   id: number;
@@ -33,9 +34,9 @@ type GitHubSearchResponse = {
 type FilterType = "merged" | "open" | "closed";
 
 const SEARCH_QUERIES: Record<FilterType, string> = {
-  merged: "author:Ashutoshx7 type:pr is:merged",
-  open: "author:Ashutoshx7 type:pr is:open",
-  closed: "author:Ashutoshx7 type:pr is:closed is:unmerged",
+  merged: "author:YashDubey61 type:pr is:merged",
+  open: "author:YashDubey61 type:pr is:open",
+  closed: "author:YashDubey61 type:pr is:closed is:unmerged",
 };
 
 function buildGraphQLQuery(searchQuery: string) {
@@ -76,7 +77,11 @@ export function OpenSourceContributions({ isFullPage = false }: { isFullPage?: b
   const fetchedRef = useRef(false);
 
   const fetchPRsForType = useCallback(async (type: FilterType) => {
-    const cacheKey = `github_prs_${type}`;
+    const cacheKey = `github_prs_yashdubey61_v3_${type}`;
+    if (typeof window !== "undefined") {
+      // Clear legacy caches
+      localStorage.removeItem(`github_prs_${type}`);
+    }
     const cachedData = typeof window !== 'undefined' ? localStorage.getItem(cacheKey) : null;
 
     // Immediately populate from cache if available
@@ -102,8 +107,7 @@ export function OpenSourceContributions({ isFullPage = false }: { isFullPage?: b
       const data = (await response.json()) as GitHubSearchResponse;
       if (data.data?.search?.edges) {
         const fetchedPRs = data.data.search.edges
-          .flatMap((edge) => (edge?.node ? [edge.node] : []))
-          .filter((pr: PR) => !(pr.title === "Main" && pr.repository.nameWithOwner === "Ashutoshx7/flexprice-storybook"));
+          .flatMap((edge) => (edge?.node ? [edge.node] : []));
         fetchedPRs.sort((a: PR, b: PR) => {
           const dateA = new Date(b.mergedAt || b.closedAt || b.createdAt).getTime();
           const dateB = new Date(a.mergedAt || a.closedAt || a.createdAt).getTime();
@@ -115,12 +119,6 @@ export function OpenSourceContributions({ isFullPage = false }: { isFullPage?: b
           localStorage.setItem(cacheKey, JSON.stringify(fetchedPRs));
         }
       } else {
-        if (data.message === "Bad credentials" || data.error) {
-          console.warn("GitHub API: Invalid or missing GITHUB_TOKEN credentials. Fallback to cached/offline timeline state.");
-        } else {
-          console.error("GraphQL response missing expected data structure", data);
-        }
-        // Even on error, mark as loaded so we don't show spinner forever
         setLoadedTypes(prev => new Set(prev).add(type));
       }
     } catch (error) {
@@ -140,11 +138,20 @@ export function OpenSourceContributions({ isFullPage = false }: { isFullPage?: b
     fetchPRsForType("closed");
   }, [fetchPRsForType]);
 
-  // Smooth tab switching with a brief crossfade
+  const [playClick] = useClickSound();
+
   const handleFilterChange = useCallback((type: FilterType) => {
     if (type === filterType) return;
+
+    try {
+      playClick();
+    } catch {
+      // AudioContext fallback
+    }
+
+    // Start fade out and layout collapse
     setIsTransitioning(true);
-    // Brief fade-out, then swap, then fade-in
+
     requestAnimationFrame(() => {
       setTimeout(() => {
         setFilterType(type);
@@ -156,7 +163,7 @@ export function OpenSourceContributions({ isFullPage = false }: { isFullPage?: b
         });
       }, 120);
     });
-  }, [filterType]);
+  }, [filterType, playClick]);
 
   const currentPrs = prsByType[filterType];
   const isLoaded = loadedTypes.has(filterType);
@@ -209,7 +216,7 @@ export function OpenSourceContributions({ isFullPage = false }: { isFullPage?: b
           }}
         >
           {!isLoaded && currentPrs.length === 0 ? (
-            /* Skeleton loading — only shows on truly first load with no cache */
+            /* Skeleton loading */
             <div className="flex flex-col">
               {Array.from({ length: initialCount }).map((_, idx) => (
                 <div key={idx} className="relative flex flex-col gap-1.5 py-4 px-4 -mx-4">
@@ -268,7 +275,7 @@ export function OpenSourceContributions({ isFullPage = false }: { isFullPage?: b
                       {pr.repository.nameWithOwner}
                     </p>
                   </a>
-                )
+                );
               })}
 
               {!isFullPage && currentPrs.length > initialCount && (
@@ -287,8 +294,8 @@ export function OpenSourceContributions({ isFullPage = false }: { isFullPage?: b
               )}
             </div>
           ) : (
-            <div className="flex justify-center py-4 text-center text-[13px] text-zinc-500">
-              No pull requests found. <span className="ml-1 text-zinc-400">(Add GITHUB_TOKEN in Vercel and redeploy)</span>
+            <div className="flex justify-center py-6 text-center text-[13px] text-zinc-500 dark:text-zinc-400">
+              No {filterType} pull requests found yet. Active development is hosted across personal repositories.
             </div>
           )}
         </div>

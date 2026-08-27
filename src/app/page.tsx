@@ -8,44 +8,42 @@ import { BlogList } from "@/components/BlogList";
 import { Highlights } from "@/components/Highlights";
 import { FooterBackground } from "@/components/FooterBackground";
 import { RightNavbar } from "@/components/RightNavbar";
+import { TopNavbar } from "@/components/TopNavbar";
 import { CommandMenu } from "@/components/command-menu";
 import Link from "next/link";
 import SoftPillButton from "@/components/pixel-perfect/soft-pill-button";
 import { FlipCoverButton } from "@/components/pixel-perfect/flip-cover-button";
 import SocialHoverCard from "@/components/pixel-perfect/social-hover-card";
+import { ProjectHoverCard } from "@/components/ProjectHoverCard";
 import { BannerParticles } from "@/components/BannerParticles";
+import { InteractiveParticles } from "@/components/ui/interactive-particles";
 import { FileText } from "lucide-react";
 import Image from "next/image";
 
 const skills = [
-  { name: "React", icon: "react" },
-  { name: "Next", icon: "nextdotjs" },
-  { name: "Expo", icon: "expo" },
-  { name: "Django", icon: "django" },
-  { name: "Express", icon: "express" },
-  { name: "Node", icon: "nodedotjs" },
-  { name: "Bun", icon: "bun" },
-  { name: "PostgreSQL", icon: "postgresql" },
-  { name: "MongoDB", icon: "mongodb" },
-  { name: "Redis", icon: "redis" },
-  { name: "Prisma", icon: "prisma" },
-  { name: "Zustand", icon: "https://raw.githubusercontent.com/pmndrs/zustand/main/docs/favicon.ico" },
-  { name: "Tanstack Query", icon: "reactquery" },
-  { name: "Postman", icon: "postman" },
-  { name: "Tailwind", icon: "tailwindcss" },
-  { name: "shadcn", icon: "shadcnui" },
-  { name: "Motion", icon: "framer" },
-  { name: "GSAP", icon: "greensock" },
-  { name: "JavaScript", icon: "javascript" },
-  { name: "TypeScript", icon: "typescript" },
   { name: "Python", icon: "python" },
-  { name: "C/C++", icon: "cplusplus" },
-  { name: "SQL", icon: "databricks" },
+  { name: "C", icon: "c" },
+  { name: "C++", icon: "cplusplus" },
+  { name: "Java", icon: "openjdk" },
+  { name: "JavaScript", icon: "javascript" },
+  { name: "Dart", icon: "dart" },
+  { name: "FastAPI", icon: "fastapi" },
+  { name: "Flutter", icon: "flutter" },
+  { name: "Node.js", icon: "nodedotjs" },
+  { name: "Express.js", icon: "express" },
+  { name: "React", icon: "react" },
+  { name: "MongoDB", icon: "mongodb" },
+  { name: "MySQL", icon: "mysql" },
+  { name: "Supabase", icon: "supabase" },
+  { name: "NumPy", icon: "numpy" },
+  { name: "Pandas", icon: "pandas" },
+  { name: "Scikit-Learn", icon: "scikitlearn" },
   { name: "Git", icon: "git" },
-  { name: "Github", icon: "github" },
-  { name: "Figma", icon: "figma" },
+  { name: "GitHub", icon: "github" },
+  { name: "VS Code", icon: "vscodium" },
+  { name: "Postman", icon: "postman" },
+  { name: "Xcode", icon: "xcode" },
   { name: "Docker", icon: "docker" },
-  { name: "Linux", icon: "linux" },
 ];
 
 export default function Home() {
@@ -54,6 +52,9 @@ export default function Home() {
 
       {/* Right Side Blueprint Navigation */}
       <RightNavbar />
+
+      {/* Floating Top Navigation (Mobile / Tablet) */}
+      <TopNavbar />
 
       {/* Vertical Lines - Ultra-fine Micro Dots */}
       <div className="absolute top-0 bottom-0 left-[30%] w-0 border-r border-black/30 dark:border-white/[0.15] pointer-events-none hidden md:block" style={{ maskImage: 'repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)' }} />
@@ -117,15 +118,15 @@ export default function Home() {
               {/* The inner image */}
               <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-[3px] sm:rounded-[5px] overflow-hidden bg-zinc-100 dark:bg-zinc-900">
                 <Image
-                  src="/avatar.png"
-                  alt="Profile"
+                  src="/yash-avatar.jpg"
+                  alt="Yash Dubey"
                   width={240}
                   height={240}
-                  quality={90}
+                  quality={95}
                   priority
                   fetchPriority="high"
                   sizes="(min-width: 640px) 120px, 96px"
-                  className="h-full w-full origin-center translate-y-1 scale-[1.1] object-cover opacity-90 grayscale contrast-100 mix-blend-multiply dark:mix-blend-normal"
+                  className="h-full w-full object-cover"
                 />
               </div>
             </div>
@@ -134,7 +135,7 @@ export default function Home() {
               <h1 className="text-[20px] sm:text-[24px] font-bold text-zinc-800 dark:text-zinc-100 tracking-tight leading-none mb-0.5 [text-shadow:-1.5px_0_0_rgba(0,200,255,0.3),1.5px_0_0_rgba(255,80,0,0.3)] dark:[text-shadow:-1.5px_0_0_rgba(0,200,255,0.6),1.5px_0_0_rgba(255,80,0,0.6)]">
                 Yash Dubey
               </h1>
-              <p className="text-[13px] sm:text-[14px] text-zinc-500 dark:text-zinc-400">B.Tech CSE (AI/ML) • Class of 2028</p>
+              <p className="text-[13px] sm:text-[14px] text-zinc-500 dark:text-zinc-400">19</p>
             </div>
           </div>
 
@@ -155,7 +156,36 @@ export default function Home() {
         <ul className="text-[14px] sm:text-[15px] text-zinc-600 dark:text-zinc-300 leading-relaxed mt-4 pl-4">
           <li className="flex gap-1.5"><span>•</span><span>Computer Science student at AKTU specializing in Artificial Intelligence & Machine Learning (Expected 2028).</span></li>
           <li className="flex gap-1.5"><span>•</span><span>Hands-on developer working across Generative AI, LLM applications, RAG pipelines, and Computer Vision.</span></li>
-          <li className="flex gap-1.5"><span>•</span><span>Currently building <span className="font-semibold text-zinc-900 dark:text-white">Pindora Shield</span> (drug discovery), <span className="font-semibold text-zinc-900 dark:text-white">VisionVerify</span> (facial attendance), <span className="font-semibold text-zinc-900 dark:text-white">PolicyWise AI</span>, and <span className="font-semibold text-zinc-900 dark:text-white">Odysis Group</span> initiatives.</span></li>
+          <li className="flex gap-1.5">
+            <span>•</span>
+            <span>
+              Currently building{" "}
+              <ProjectHoverCard slug="pindora-shield">
+                <span className="font-semibold text-zinc-900 dark:text-white underline decoration-zinc-300/80 dark:decoration-zinc-700 underline-offset-4 cursor-pointer hover:decoration-zinc-900 dark:hover:decoration-zinc-100 transition-colors">
+                  Pindora Shield
+                </span>
+              </ProjectHoverCard>{" "}
+              (drug discovery),{" "}
+              <ProjectHoverCard slug="vision-verify">
+                <span className="font-semibold text-zinc-900 dark:text-white underline decoration-zinc-300/80 dark:decoration-zinc-700 underline-offset-4 cursor-pointer hover:decoration-zinc-900 dark:hover:decoration-zinc-100 transition-colors">
+                  VisionVerify
+                </span>
+              </ProjectHoverCard>{" "}
+              (facial attendance),{" "}
+              <ProjectHoverCard slug="policywise-ai">
+                <span className="font-semibold text-zinc-900 dark:text-white underline decoration-zinc-300/80 dark:decoration-zinc-700 underline-offset-4 cursor-pointer hover:decoration-zinc-900 dark:hover:decoration-zinc-100 transition-colors">
+                  PolicyWise AI
+                </span>
+              </ProjectHoverCard>
+              , and{" "}
+              <ProjectHoverCard slug="odysis-studio">
+                <span className="font-semibold text-zinc-900 dark:text-white underline decoration-zinc-300/80 dark:decoration-zinc-700 underline-offset-4 cursor-pointer hover:decoration-zinc-900 dark:hover:decoration-zinc-100 transition-colors">
+                  Odysis Group
+                </span>
+              </ProjectHoverCard>{" "}
+              initiatives.
+            </span>
+          </li>
         </ul>
 
         {/* Buttons */}
@@ -351,13 +381,12 @@ export default function Home() {
             <div className="flex flex-wrap gap-2 w-full">
               {skills.map((skill, index) => (
                 <div key={index} className="grow flex items-center justify-center gap-2 px-3 py-1.5 bg-zinc-50 hover:bg-zinc-100 dark:bg-[#0a0a0a] dark:hover:bg-[#121214] border border-black/30 dark:border-white/[0.15] rounded-[6px] transition-colors duration-200 cursor-default">
-                  <img
+                  <Image
                     src={skill.icon.startsWith('http') ? skill.icon : `https://cdn.simpleicons.org/${skill.icon}/71717a`}
                     alt={skill.name}
                     width={14}
                     height={14}
-                    loading="lazy"
-                    decoding="async"
+                    unoptimized
                     className={`h-3.5 w-3.5 opacity-80 ${skill.icon.startsWith('http') ? 'rounded-sm grayscale' : ''}`}
                   />
                   <span className="text-[13px] font-medium text-zinc-600 dark:text-zinc-400">{skill.name}</span>
@@ -400,7 +429,7 @@ export default function Home() {
             <div className="absolute bottom-0 left-0 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] -translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
             <div className="absolute bottom-0 right-0 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
 
-            <Link href="https://medium.com/@ashutoshx7" target="_blank" rel="noopener noreferrer" className="relative group block mt-0">
+            <Link href="https://medium.com/@yashdubey" target="_blank" rel="noopener noreferrer" className="relative group block mt-0">
               <div className="absolute -inset-[5px] border border-black/5 dark:border-white/5 rounded-[11px] pointer-events-none transition-colors duration-300 group-hover:border-black/10 dark:group-hover:border-white/10" />
               <div className="relative flex items-center gap-1.5 px-4 py-2 bg-zinc-50 hover:bg-zinc-100 dark:bg-[#09090b] dark:hover:bg-[#121214] text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 rounded-[6px] text-[13px] font-medium transition-all duration-300 border border-black/5 dark:border-white/5 shadow-sm shadow-black/20 dark:shadow-lg dark:shadow-black/80">
                 View All
@@ -447,9 +476,28 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Minimal Quote Section */}
-        <div className="mt-12 flex flex-col items-center justify-center relative py-12">
+        {/* Interactive Quote & Particle Showcase */}
+        <div className="mt-12 flex flex-col items-center justify-center relative py-8">
           <div className="max-w-[480px] w-full flex flex-col items-center">
+            {/* Interactive 3D Avatar Particle Canvas */}
+            <div className="relative w-28 h-28 sm:w-32 sm:h-32 mb-6 rounded-2xl overflow-hidden border border-black/10 dark:border-white/10 shadow-lg shadow-black/5 dark:shadow-black/40 bg-zinc-50 dark:bg-[#0c0c0e]">
+              <InteractiveParticles
+                src="/yash-avatar.jpg"
+                allowUpload={false}
+                background="transparent"
+                color="#71717a"
+                size={1.1}
+                randomness={1.5}
+                depth={2.5}
+                touchRadius={0.2}
+                threshold={20}
+                className="w-full h-full"
+              />
+              <div className="absolute bottom-1.5 right-1.5 px-1.5 py-0.5 rounded bg-black/60 dark:bg-white/10 backdrop-blur-xs text-[9px] text-white/80 font-mono pointer-events-none">
+                hover me
+              </div>
+            </div>
+
             <h3 className="text-[16px] font-medium text-center leading-relaxed text-zinc-500 dark:text-zinc-400 mb-6 italic">
               &quot;I don&apos;t just study technology. I build with it.&quot;
             </h3>

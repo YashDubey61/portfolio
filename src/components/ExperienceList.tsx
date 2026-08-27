@@ -2,13 +2,15 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import { ExperienceIcon } from "./ExperienceIcons";
 
 type ExperienceData = {
   title: string;
   role: string;
   dates: string;
   location: string;
-  src: string;
+  src?: string;
+  iconKey?: string;
   type?: string;
   imageFit?: "contain" | "cover";
   imageZoom?: number;
@@ -25,9 +27,8 @@ const experiences: ExperienceData[] = [
     dates: "Feb 2025 - Apr 2025",
     location: "Hackathon",
     type: "Hackathon",
-    src: "/image copy.png",
-    imageFit: "contain",
-    imageZoom: 1,
+    iconKey: "hackoverflow",
+    src: "/hackoverflow-logo.jpg",
     description: `
       Ideation: Collaborated with a cross-functional team to ideate, design, and develop Pindora Shield, an AI-powered healthcare & drug discovery assistant within hackathon deadlines
       ML Pipeline: Implemented molecular property analysis pipelines, SMILES string parsing, and IC50 property estimation using RDKit and NumPy
@@ -56,9 +57,8 @@ const experiences: ExperienceData[] = [
     dates: "2025 - Present",
     location: "Kanpur, India",
     type: "Initiative",
-    src: "/project-image/image copy.png",
-    imageFit: "contain",
-    imageZoom: 1,
+    iconKey: "odysis",
+    src: "/odysis-logo.png",
     description: `
       Product Studio: Independent technology initiative creating AI products, full-stack applications, and workflow automations
       Key Projects: Developing experimental tools including Odysis Studio (AI video editor) and FinXfer cross-border payment platform
@@ -85,9 +85,7 @@ const experiences: ExperienceData[] = [
     dates: "Sep 2024 - Jul 2028",
     location: "Lucknow / Kanpur, India",
     type: "Education",
-    src: "/image copy 3.png",
-    imageFit: "contain",
-    imageZoom: 1,
+    iconKey: "aktu",
     description: `
       Undergraduate Program: Pursuing 4-year B.Tech in Computer Science Engineering with specialization in Artificial Intelligence and Machine Learning
       Coursework: Data Structures & Algorithms, Operating Systems, Theory of Automata, OOP with Java, Python Programming, Computer Networks, and Machine Learning
@@ -158,16 +156,20 @@ export function ExperienceList() {
               <div className="flex items-start gap-3 sm:gap-4 flex-1 min-w-0">
                 <div className="size-10 shrink-0 rounded-[10px] border border-black/10 bg-zinc-50 p-[2px] shadow-sm shadow-black/15 dark:border-zinc-800 dark:bg-[#111111] dark:shadow-md dark:shadow-black/50">
                   <div className="w-full h-full rounded-[7px] border border-black/5 dark:border-black/20 bg-white flex items-center justify-center overflow-hidden relative">
-                    <Image
-                      src={item.src}
-                      alt={item.title}
-                      width={40}
-                      height={40}
-                      sizes="40px"
-                      quality={60}
-                      style={item.imageZoom ? { transform: `scale(${item.imageZoom})` } : undefined}
-                      className={`${item.imageFit === "contain" ? "object-contain" : "object-cover"} w-full h-full p-0.5`}
-                    />
+                    {item.iconKey ? (
+                      <ExperienceIcon name={item.iconKey} className="w-full h-full" />
+                    ) : item.src ? (
+                      <Image
+                        src={item.src}
+                        alt={item.title}
+                        width={40}
+                        height={40}
+                        sizes="40px"
+                        quality={60}
+                        style={item.imageZoom ? { transform: `scale(${item.imageZoom})` } : undefined}
+                        className={`${item.imageFit === "contain" ? "object-contain" : "object-cover"} w-full h-full p-0.5`}
+                      />
+                    ) : null}
                   </div>
                 </div>
                 <div className="flex flex-col gap-0.5 min-w-0 pr-2 sm:pr-4">

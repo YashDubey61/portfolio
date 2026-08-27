@@ -17,10 +17,10 @@ interface FlipCoverButtonProps {
  * 3D Flip Cover Button Component.
  * Styled to 100% exact size, padding, and height match with SoftPillButton ("Send an email").
  * On hover, the white "Book an intro call" lid flips open -120deg on a 3D hinge,
- * revealing the Cal.com themed button inside linking to https://cal.com/ashutosh-singh-1fqn5v/30min!
+ * revealing the Cal.com themed button inside linking to https://cal.com/yash-dubey61/30min!
  */
 export function FlipCoverButton({
-  href = "https://cal.com/ashutosh-singh-1fqn5v/30min",
+  href = "https://cal.com/yash-dubey61/30min",
   label = "Book an intro call",
   className = "",
 }: FlipCoverButtonProps) {

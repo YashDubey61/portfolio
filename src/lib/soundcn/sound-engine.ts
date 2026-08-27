@@ -2,11 +2,17 @@ let audioContext: AudioContext | null = null;
 const bufferCache = new Map<string, AudioBuffer>();
 
 export function getAudioContext(): AudioContext {
-  if (!audioContext) {
-    audioContext = new AudioContext();
+  if (!audioContext && typeof window !== "undefined") {
+    const AudioCtx =
+      window.AudioContext ||
+      (window as unknown as { webkitAudioContext: typeof AudioContext })
+        .webkitAudioContext;
+    if (AudioCtx) {
+      audioContext = new AudioCtx();
+    }
   }
 
-  return audioContext;
+  return audioContext!;
 }
 
 export async function decodeAudioData(dataUri: string): Promise<AudioBuffer> {

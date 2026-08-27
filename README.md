@@ -1,6 +1,6 @@
 
 
-# Ashutoshx7 — Portfolio
+# Yash Dubey — Portfolio
 
 A minimal, fast, and interactive developer portfolio built with **Next.js 16**, **React 19**, **Tailwind CSS v4**, and **TypeScript**.
 
@@ -100,16 +100,14 @@ Portfolio-v2-
 
 This site is optimized for deployment on [Vercel](https://vercel.com/). Connect your GitHub repository to Vercel and deploy with zero configuration.
 
-For other platforms, use the static or Node.js output mode configured in `next.config.ts`.
-
 ---
 
 ## Connect
 
-- **GitHub:** [Ashutoshx7](https://github.com/Ashutoshx7)
-- **Twitter / X:** [@Ashutosh_7x7](https://x.com/Ashutosh_7x7)
-- **LinkedIn:** [Ashutosh Singh](https://www.linkedin.com/in/ashutosh-singh-855177329/)
+- **GitHub:** [YashDubey61](https://github.com/YashDubey61)
+- **Twitter / X:** [@YashDubey61](https://x.com/YashDubey61)
+- **LinkedIn:** [Yash Dubey](https://www.linkedin.com/in/yash-dubey61)
 
 ---
 
-Built with purpose, precision, and a little bit of chaos.
+Built with purpose, precision, and dedication.

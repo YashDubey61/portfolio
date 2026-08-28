@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -38,13 +38,33 @@ export const ProjectCard = ({
 }) => {
   const [hoveredTech, setHoveredTech] = useState<string | null>(null);
   const [isHovered, setIsHovered] = useState(false);
-  const [isMobileActive, setIsMobileActive] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(cardRef, {
+    margin: "-15% 0px -15% 0px",
+    amount: 0.2,
+  });
   const router = useRouter();
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(
+        window.innerWidth < 768 ||
+        window.matchMedia("(hover: none) and (pointer: coarse)").matches
+      );
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const isComingSoon = project.slug === "odysis-studio" || project.slug === "finxfer";
   const isLive = Boolean(project.live);
-  const isCardActive = isHovered || isMobileActive;
+
+  // Distinct behaviors:
+  // - Mobile: in-view scroll animation
+  // - Laptop/Desktop: strict mouse cursor hover only
+  const isCardActive = isMobile ? isInView : isHovered;
 
   const statusColor = isComingSoon
     ? "bg-amber-500"
@@ -58,35 +78,7 @@ export const ProjectCard = ({
       ? "Live"
       : "Repository";
 
-  useEffect(() => {
-    if (!isMobileActive) return;
-    const handleTouchOutside = (e: TouchEvent | MouseEvent) => {
-      if (cardRef.current && !cardRef.current.contains(e.target as Node)) {
-        setIsMobileActive(false);
-      }
-    };
-    window.addEventListener("touchstart", handleTouchOutside);
-    window.addEventListener("mousedown", handleTouchOutside);
-    return () => {
-      window.removeEventListener("touchstart", handleTouchOutside);
-      window.removeEventListener("mousedown", handleTouchOutside);
-    };
-  }, [isMobileActive]);
-
-  const handleCardClick = (e: React.MouseEvent) => {
-    const isTouch =
-      typeof window !== "undefined" &&
-      (window.matchMedia("(hover: none)").matches ||
-        window.matchMedia("(pointer: coarse)").matches ||
-        navigator.maxTouchPoints > 0);
-
-    if (isTouch) {
-      if (!isMobileActive) {
-        e.preventDefault();
-        setIsMobileActive(true);
-        return;
-      }
-    }
+  const handleCardClick = () => {
     router.push(`/projects/${project.slug}`);
   };
 

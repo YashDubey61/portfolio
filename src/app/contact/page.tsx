@@ -19,6 +19,7 @@ export default function ContactPage() {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
   const isFormValid =
     formData.name.trim() !== "" &&
@@ -45,9 +46,13 @@ export default function ContactPage() {
       if (response.ok) {
         form.reset();
         setFormData({ name: "", email: "", message: "" });
+        setSubmitStatus("success");
+      } else {
+        setSubmitStatus("error");
       }
     } catch (error) {
       console.error("Error submitting form:", error);
+      setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
     }
@@ -109,7 +114,7 @@ export default function ContactPage() {
           src="/ChatGPT%20Image%20May%2022%2C%202026%2C%2012_40_29%20AM.jpg"
           alt=""
           fill
-          fetchPriority="high"
+          priority
           sizes="(min-width: 768px) 40vw, 100vw"
           quality={100}
           className="object-cover object-center dark:hidden"
@@ -118,7 +123,7 @@ export default function ContactPage() {
           src="/ChatGPT%20Image%20May%2022%2C%202026%2C%2012_49_39%20AM.jpg"
           alt=""
           fill
-          fetchPriority="high"
+          priority
           sizes="(min-width: 768px) 40vw, 100vw"
           quality={100}
           className="hidden object-cover object-center dark:block"
@@ -219,6 +224,17 @@ export default function ContactPage() {
               className="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 px-4 text-[14px] text-zinc-900 dark:text-zinc-100 focus:outline-none focus:border-zinc-500 dark:focus:border-zinc-500 transition-colors placeholder:text-zinc-300 dark:placeholder:text-zinc-700 resize-none"
             />
           </div>
+
+          {submitStatus === "success" && (
+            <div className="flex items-center justify-center p-3 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-[13px] font-medium text-center">
+              Message sent successfully! I&apos;ll get back to you shortly.
+            </div>
+          )}
+          {submitStatus === "error" && (
+            <div className="flex items-center justify-center p-3 rounded-md bg-rose-500/10 border border-rose-500/20 text-rose-600 dark:text-rose-400 text-[13px] font-medium text-center">
+              Failed to send message. Please reach out directly at dubeyy426@gmail.com.
+            </div>
+          )}
 
           {/* FlightButton with airplane animation - wrapped in premium border */}
           <div className="flex justify-center w-full pt-4">

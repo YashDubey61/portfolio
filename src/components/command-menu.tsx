@@ -74,12 +74,10 @@ export function CommandMenu() {
                 target.tagName === 'TEXTAREA' ||
                 target.tagName === 'SELECT'
 
-            if (!open) {
+            if (!open || isTypingField) {
                 return
             }
 
-            // When the command palette is open, we still want shortcuts to work
-            // even if the search input is focused.
             if (e.shiftKey) {
                 const key = e.key.toLowerCase()
 
@@ -118,9 +116,6 @@ export function CommandMenu() {
                     e.preventDefault()
                     runCommand(() => setTheme("system"))
                 }
-            } else if (isTypingField) {
-                // Allow normal typing when no shortcut is being used
-                return
             }
         }
 

@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 import {
   type TechIcon,
@@ -36,11 +37,14 @@ export const ProjectCard = ({
   isPriority?: boolean;
 }) => {
   const [hoveredTech, setHoveredTech] = useState<string | null>(null);
-  const [shouldLoadHoverImage, setShouldLoadHoverImage] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isMobileActive, setIsMobileActive] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   const isComingSoon = project.slug === "odysis-studio" || project.slug === "finxfer";
   const isLive = Boolean(project.live);
+  const isCardActive = isHovered || isMobileActive;
 
   const statusColor = isComingSoon
     ? "bg-amber-500"
@@ -54,20 +58,57 @@ export const ProjectCard = ({
       ? "Live"
       : "Repository";
 
+  useEffect(() => {
+    if (!isMobileActive) return;
+    const handleTouchOutside = (e: TouchEvent | MouseEvent) => {
+      if (cardRef.current && !cardRef.current.contains(e.target as Node)) {
+        setIsMobileActive(false);
+      }
+    };
+    window.addEventListener("touchstart", handleTouchOutside);
+    window.addEventListener("mousedown", handleTouchOutside);
+    return () => {
+      window.removeEventListener("touchstart", handleTouchOutside);
+      window.removeEventListener("mousedown", handleTouchOutside);
+    };
+  }, [isMobileActive]);
+
+  const handleCardClick = (e: React.MouseEvent) => {
+    const isTouch =
+      typeof window !== "undefined" &&
+      (window.matchMedia("(hover: none)").matches ||
+        window.matchMedia("(pointer: coarse)").matches ||
+        navigator.maxTouchPoints > 0);
+
+    if (isTouch) {
+      if (!isMobileActive) {
+        e.preventDefault();
+        setIsMobileActive(true);
+        return;
+      }
+    }
+    router.push(`/projects/${project.slug}`);
+  };
+
   return (
     <div
+      ref={cardRef}
       className="flex flex-col group cursor-pointer"
-      onClick={() => router.push(`/projects/${project.slug}`)}
-      onMouseEnter={() => setShouldLoadHoverImage(true)}
-      onFocus={() => setShouldLoadHoverImage(true)}
-      onTouchStart={() => setShouldLoadHoverImage(true)}
+      onClick={handleCardClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onFocus={() => setIsHovered(true)}
+      onBlur={() => setIsHovered(false)}
     >
       {/* Outer Wrapper */}
       <motion.div
-        className="relative w-full aspect-[1.25] rounded-xl border border-black/5 dark:border-white/5 bg-zinc-50/80 dark:bg-[#09090b]/80 shadow-sm p-3.5 pb-0 flex flex-col overflow-hidden transition-all duration-300 hover:shadow-md hover:border-black/10 dark:hover:border-white/10 sm:aspect-[1.4] sm:p-4 sm:pb-0"
+        className={cn(
+          "relative w-full aspect-[1.25] rounded-xl border border-black/5 dark:border-white/5 bg-zinc-50/80 dark:bg-[#09090b]/80 shadow-sm p-3.5 pb-0 flex flex-col overflow-hidden transition-all duration-300 hover:shadow-md hover:border-black/10 dark:hover:border-white/10 sm:aspect-[1.4] sm:p-4 sm:pb-0",
+          isCardActive && "shadow-md border-black/10 dark:border-white/10"
+        )}
         initial="rest"
         whileHover="hover"
-        animate="rest"
+        animate={isCardActive ? "hover" : "rest"}
       >
         <div className="flex items-center justify-end z-10 min-h-[24px]">
           {project.hasPin && (
@@ -80,25 +121,29 @@ export const ProjectCard = ({
         </div>
 
         {/* Ambient Hover Background */}
-        <motion.div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: shouldLoadHoverImage
-              && project.backgroundImage
-              ? `url('${project.backgroundImage}')`
-              : undefined,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-          variants={{
-            rest: { opacity: 0, scale: 1 },
-            hover: { opacity: 1, scale: 1.05 },
-          }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-        />
+        {project.backgroundImage && (
+          <motion.div
+            className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
+            variants={{
+              rest: { opacity: 0, scale: 1 },
+              hover: { opacity: 1, scale: 1.05 },
+            }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+          >
+            <Image
+              src={project.backgroundImage}
+              alt={`${project.title} background`}
+              fill
+              sizes="(min-width: 768px) 33vw, 100vw"
+              className="object-cover object-center"
+              quality={80}
+              priority={isPriority}
+            />
+          </motion.div>
+        )}
 
         <motion.h1
-          className="absolute top-4 left-4 text-[10px] font-bold text-zinc-500 dark:text-zinc-400 z-30 uppercase tracking-widest drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]"
+          className="absolute top-4 left-4 text-[10px] font-bold text-zinc-500 dark:text-zinc-400 z-30 uppercase tracking-widest drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)] pointer-events-none"
           variants={{
             rest: { left: "1rem", top: "1rem", x: "0%", color: "#71717a", opacity: 0 },
             hover: { left: "50%", top: "25%", x: "-50%", color: "#ffffff", opacity: 1 },
@@ -110,16 +155,28 @@ export const ProjectCard = ({
 
         {project.video && (
           <motion.div
-            className="absolute inset-0 z-40 flex items-center justify-center pointer-events-none group-hover:pointer-events-auto"
+            className={cn(
+              "absolute inset-0 z-40 flex items-center justify-center transition-opacity",
+              isCardActive ? "pointer-events-auto" : "pointer-events-none md:group-hover:pointer-events-auto"
+            )}
             variants={{ rest: { scale: 0.5, opacity: 0 }, hover: { scale: 1, opacity: 1 } }}
             transition={{ type: "spring", stiffness: 300, damping: 20, delay: 0.05 }}
           >
             <div
-              className="h-10 w-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 active:scale-95 transition-transform duration-200 border border-white/50"
+              role="button"
+              tabIndex={0}
+              className="h-10 w-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 active:scale-95 transition-transform duration-200 border border-white/50 pointer-events-auto"
               onClick={(e) => {
                 e.stopPropagation();
                 if (project.video) setActiveVideo(project.video);
               }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.stopPropagation();
+                  if (project.video) setActiveVideo(project.video);
+                }
+              }}
+              aria-label="Play video"
             >
               <svg className="w-4 h-4 text-zinc-900 ml-0.5 fill-current" viewBox="0 0 24 24">
                 <path d="M5.25 5.653v12.694c0 .856.926 1.39 1.668.958l11.1-6.347a1.125 1.125 0 000-1.916L6.918 4.695c-.742-.432-1.668.102-1.668.958z" />
@@ -130,7 +187,7 @@ export const ProjectCard = ({
 
         {/* Floating screenshot */}
         <motion.div
-          className="absolute bottom-0 left-1/2 w-[85%] rounded-t-[10px] bg-white dark:bg-[#0a0a0a] p-0 shadow-[0_-8px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_-8px_30px_rgba(0,0,0,0.5)] z-20 border border-black/5 dark:border-white/[0.15] border-b-0"
+          className="absolute bottom-0 left-1/2 w-[85%] rounded-t-[10px] bg-white dark:bg-[#0a0a0a] p-0 shadow-[0_-8px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_-8px_30px_rgba(0,0,0,0.5)] z-20 border border-black/5 dark:border-white/[0.15] border-b-0 pointer-events-none"
           variants={{
             rest: { height: "78%", y: 0, x: "-50%" },
             hover: { height: "72%", y: 4, x: "-50%" },
@@ -233,7 +290,14 @@ export const ProjectCard = ({
             })}
           </div>
 
-          <div className="flex items-center gap-1 text-[12px] text-zinc-500 dark:text-zinc-400 font-medium group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">
+          <div
+            className={cn(
+              "flex items-center gap-1 text-[12px] font-medium transition-colors",
+              isCardActive
+                ? "text-zinc-900 dark:text-zinc-100"
+                : "text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100"
+            )}
+          >
             <span>View Project</span>
             <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5">
               <line x1="7" y1="17" x2="17" y2="7"></line>

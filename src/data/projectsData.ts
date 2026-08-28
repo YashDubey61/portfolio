@@ -160,7 +160,7 @@ export const projectsData: Project[] = [
     github: "https://github.com/YashDubey61",
     live: "",
     post: "https://www.linkedin.com/in/yash-dubey61",
-    backgroundImage: "",
+    backgroundImage: "/project-image/bg-1.jpg",
     hasPin: false,
   },
   {
@@ -176,7 +176,7 @@ export const projectsData: Project[] = [
     github: "https://github.com/YashDubey61",
     live: "",
     post: "https://www.linkedin.com/in/yash-dubey61",
-    backgroundImage: "",
+    backgroundImage: "/project-image/bg-2.jpg",
     hasPin: false,
   },
 ];

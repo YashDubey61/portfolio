@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://www.wwwyash.tech"
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.yash.tech"
   ),
   title: "Yash Dubey | AI/ML Developer & Engineer",
   description:
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     title: "Yash Dubey | AI/ML Developer & Engineer",
     description:
       "AI/ML-focused Computer Science developer building practical software, AI systems, and technology products.",
-    url: "https://www.wwwyash.tech",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.yash.tech",
     siteName: "Yash Dubey",
     type: "website",
     images: [

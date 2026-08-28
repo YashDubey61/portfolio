@@ -16,7 +16,6 @@ import { FlipCoverButton } from "@/components/pixel-perfect/flip-cover-button";
 import SocialHoverCard from "@/components/pixel-perfect/social-hover-card";
 import { ProjectHoverCard } from "@/components/ProjectHoverCard";
 import { BannerParticles } from "@/components/BannerParticles";
-import { InteractiveParticles } from "@/components/ui/interactive-particles";
 import { FileText } from "lucide-react";
 import Image from "next/image";
 
@@ -86,7 +85,7 @@ export default function Home() {
           src="/ChatGPT%20Image%20May%2022%2C%202026%2C%2012_40_29%20AM.jpg"
           alt=""
           fill
-          fetchPriority="high"
+          priority
           sizes="(min-width: 768px) 40vw, 100vw"
           quality={100}
           className="object-cover object-center dark:hidden"
@@ -95,7 +94,7 @@ export default function Home() {
           src="/ChatGPT%20Image%20May%2022%2C%202026%2C%2012_49_39%20AM.jpg"
           alt=""
           fill
-          fetchPriority="high"
+          priority
           sizes="(min-width: 768px) 40vw, 100vw"
           quality={100}
           className="hidden object-cover object-center dark:block"
@@ -429,7 +428,7 @@ export default function Home() {
             <div className="absolute bottom-0 left-0 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] -translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
             <div className="absolute bottom-0 right-0 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
 
-            <Link href="https://medium.com/@yashdubey" target="_blank" rel="noopener noreferrer" className="relative group block mt-0">
+            <Link href="/blogs" className="relative group block mt-0">
               <div className="absolute -inset-[5px] border border-black/5 dark:border-white/5 rounded-[11px] pointer-events-none transition-colors duration-300 group-hover:border-black/10 dark:group-hover:border-white/10" />
               <div className="relative flex items-center gap-1.5 px-4 py-2 bg-zinc-50 hover:bg-zinc-100 dark:bg-[#09090b] dark:hover:bg-[#121214] text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 rounded-[6px] text-[13px] font-medium transition-all duration-300 border border-black/5 dark:border-white/5 shadow-sm shadow-black/20 dark:shadow-lg dark:shadow-black/80">
                 View All
@@ -476,30 +475,13 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Interactive Quote & Particle Showcase */}
+        {/* Quote Section */}
         <div className="mt-12 flex flex-col items-center justify-center relative py-8">
           <div className="max-w-[480px] w-full flex flex-col items-center">
-            {/* Interactive 3D Avatar Particle Canvas */}
-            <div className="relative w-28 h-28 sm:w-32 sm:h-32 mb-6 rounded-2xl overflow-hidden border border-black/10 dark:border-white/10 shadow-lg shadow-black/5 dark:shadow-black/40 bg-zinc-50 dark:bg-[#0c0c0e]">
-              <InteractiveParticles
-                src="/yash-avatar.jpg"
-                allowUpload={false}
-                background="transparent"
-                color="#71717a"
-                size={1.1}
-                randomness={1.5}
-                depth={2.5}
-                touchRadius={0.2}
-                threshold={20}
-                className="w-full h-full"
-              />
-              <div className="absolute bottom-1.5 right-1.5 px-1.5 py-0.5 rounded bg-black/60 dark:bg-white/10 backdrop-blur-xs text-[9px] text-white/80 font-mono pointer-events-none">
-                hover me
-              </div>
-            </div>
-
             <h3 className="text-[16px] font-medium text-center leading-relaxed text-zinc-500 dark:text-zinc-400 mb-6 italic">
-              &quot;Do so much work that it would be unreasonable<br className="hidden md:block" /> for you to not be successful.&quot;
+              &quot;Do so much work that it would be unreasonable{" "}
+              <br className="hidden md:block" />
+              for you to not be successful.&quot;
             </h3>
 
             <div className="flex items-center gap-3 text-[10px] font-medium tracking-[0.2em] text-zinc-400 dark:text-zinc-600 uppercase">

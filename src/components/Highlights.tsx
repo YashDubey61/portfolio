@@ -13,7 +13,7 @@ function AnthropicPoster() {
         alt=""
         fill
         sizes="(min-width: 640px) 300px, 280px"
-        className="object-cover opacity-20 grayscale group-hover:grayscale-0 group-hover:opacity-40 transition-all duration-500"
+        className="object-cover opacity-35 group-hover:opacity-50 transition-all duration-500"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/80 to-transparent" />
 
@@ -42,7 +42,7 @@ function GoogleCloudPoster() {
         alt=""
         fill
         sizes="(min-width: 640px) 300px, 280px"
-        className="object-cover opacity-20 grayscale group-hover:grayscale-0 group-hover:opacity-40 transition-all duration-500"
+        className="object-cover opacity-35 group-hover:opacity-50 transition-all duration-500"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/80 to-transparent" />
 
@@ -71,7 +71,7 @@ function OraclePoster() {
         alt=""
         fill
         sizes="(min-width: 640px) 300px, 280px"
-        className="object-cover opacity-20 grayscale group-hover:grayscale-0 group-hover:opacity-40 transition-all duration-500"
+        className="object-cover opacity-35 group-hover:opacity-50 transition-all duration-500"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/80 to-transparent" />
       
@@ -110,7 +110,7 @@ function IITMPoster() {
         alt=""
         fill
         sizes="(min-width: 640px) 300px, 280px"
-        className="object-cover opacity-20 grayscale group-hover:grayscale-0 group-hover:opacity-40 transition-all duration-500"
+        className="object-cover opacity-35 group-hover:opacity-50 transition-all duration-500"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/80 to-transparent" />
 
@@ -166,7 +166,7 @@ function HighlightCard({ item }: { item: Highlight }) {
               alt={item.title}
               fill
               sizes="(min-width: 640px) 300px, 280px"
-              className="object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-500 scale-[1.01] group-hover:scale-[1.03]"
+              className="object-cover object-center transition-all duration-500 scale-[1.01] group-hover:scale-[1.03]"
             />
           ) : (
             <div

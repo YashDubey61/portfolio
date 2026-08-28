@@ -61,7 +61,20 @@ export function ProjectHoverCard({
       closeDelay={150}
     >
       <HoverCard.Trigger asChild>
-        <span className={cn("inline-block cursor-pointer", className)}>
+        <span
+          className={cn("inline-block cursor-pointer", className)}
+          onClick={(e) => {
+            const isTouch =
+              typeof window !== "undefined" &&
+              (window.matchMedia("(hover: none)").matches ||
+                window.matchMedia("(pointer: coarse)").matches ||
+                navigator.maxTouchPoints > 0);
+            if (isTouch) {
+              e.preventDefault();
+              setIsOpen((prev) => !prev);
+            }
+          }}
+        >
           {children}
         </span>
       </HoverCard.Trigger>

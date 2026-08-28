@@ -134,6 +134,7 @@ const DisplacementText = ({
     renderer.setSize(width, height, false);
     renderer.domElement.style.width = "100%";
     renderer.domElement.style.height = "100%";
+    container.innerHTML = "";
     container.appendChild(renderer.domElement);
 
     const geometry = new THREE.PlaneGeometry(30, 30, 100, 100);

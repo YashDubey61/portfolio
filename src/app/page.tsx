@@ -499,12 +499,12 @@ export default function Home() {
             </div>
 
             <h3 className="text-[16px] font-medium text-center leading-relaxed text-zinc-500 dark:text-zinc-400 mb-6 italic">
-              &quot;I don&apos;t just study technology. I build with it.&quot;
+              &quot;Do so much work that it would be unreasonable<br className="hidden md:block" /> for you to not be successful.&quot;
             </h3>
 
             <div className="flex items-center gap-3 text-[10px] font-medium tracking-[0.2em] text-zinc-400 dark:text-zinc-600 uppercase">
               <div className="w-4 h-[1px] bg-zinc-200 dark:bg-zinc-800" />
-              YASH DUBEY
+              ALEX HORMOZI
               <div className="w-4 h-[1px] bg-zinc-200 dark:bg-zinc-800" />
             </div>
           </div>

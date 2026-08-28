@@ -114,6 +114,27 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 playsInline
               />
             )
+          ) : project.lightModeSrc ? (
+            <>
+              <Image
+                src={project.src}
+                alt={project.imageTitle}
+                fill
+                preload
+                sizes="(min-width: 768px) 40vw, 100vw"
+                quality={85}
+                className="object-cover hidden dark:block"
+              />
+              <Image
+                src={project.lightModeSrc}
+                alt={project.imageTitle}
+                fill
+                preload
+                sizes="(min-width: 768px) 40vw, 100vw"
+                quality={85}
+                className="object-cover dark:hidden"
+              />
+            </>
           ) : (
             <Image
               src={project.src}
@@ -121,7 +142,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               fill
               preload
               sizes="(min-width: 768px) 40vw, 100vw"
-              quality={75}
+              quality={85}
               className="object-cover"
             />
           )}

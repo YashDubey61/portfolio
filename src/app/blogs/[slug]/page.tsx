@@ -67,7 +67,7 @@ export async function generateMetadata({
         {
           url: "/og-image.jpg",
           width: 1024,
-          height: 576,
+          height: 682,
           alt: post.title,
         },
       ],

@@ -41,7 +41,7 @@ export const metadata: Metadata = {
       {
         url: "/og-image.jpg",
         width: 1024,
-        height: 576,
+        height: 682,
         type: "image/jpeg",
         alt: "Yash Dubey - Portfolio",
       },

@@ -246,13 +246,14 @@ export const ProjectCard = ({
   );
 };
 
-export const ProjectsGrid = () => {
+export const ProjectsGrid = ({ limit = 4 }: { limit?: number }) => {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  const displayedProjects = limit ? projectsData.slice(0, limit) : projectsData;
 
   return (
     <div className="relative">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
-        {projectsData.map((project, index) => (
+        {displayedProjects.map((project, index) => (
           <ProjectCard
             key={project.slug}
             project={project}
